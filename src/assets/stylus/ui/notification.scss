@@ -1,0 +1,43 @@
+$width: 300px;
+$margin: 16px;
+$padding: 16px;
+$radius: 12px;
+$gap: 12px;
+$transition: 0.5s;
+
+$bgSuccess: rgb(123, 121, 170);
+$bgError: rgb(183, 85, 85);
+$color: #f9f9f9;
+
+$fontSize: 17px;
+
+.notification {
+  max-width: $width;
+
+  position: fixed;
+  left: $margin;
+  bottom: $margin;
+  transform: translateY(100vh);
+  transition: $transition;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: $gap;
+  padding: $padding;
+  font-size: $fontSize;
+
+  border-radius: $radius;
+  color: $color;
+
+  &.success {
+    background-color: $bgSuccess;
+  }
+  &.error {
+    background-color: $bgError;
+  }
+  &.active {
+    transform: translateY(0);
+    transition: $transition;
+  }
+}

@@ -1,0 +1,44 @@
+$padding: 8px;
+$radius: 16px;
+$width: 300px;
+
+$bg: rgb(140, 85, 229);
+$bgDisabled: rgb(90, 52, 151);
+$bgHover: rgb(103, 62, 169);
+$shadow: 0px 8px 20px 1px rgba(0, 0, 0, 0.25);
+$color: #f9f9f9f9;
+$colorDisabled: rgb(155, 155, 155);
+
+$fontSize: 16px;
+
+$transition: 0.2s;
+
+.custom-btn {
+  padding: $padding * 2 $padding * 3;
+  outline: none;
+  border: none;
+  border-radius: $radius;
+  display: block;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $bg;
+  color: $color;
+  font-size: $fontSize;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: $transition;
+  width: $width;
+
+  &:hover {
+    background-color: $bgHover;
+    transition: $transition;
+    box-shadow: $shadow;
+  }
+
+  &.disabled {
+    background-color: $bgDisabled;
+    color: $colorDisabled;
+    box-shadow: none;
+  }
+}

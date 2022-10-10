@@ -1,0 +1,61 @@
+$padding: 8px;
+$radius: 16px;
+
+$shadow: 0px 8px 20px 1px rgba(0, 0, 0, 0.25);
+$success: rgb(92, 198, 118);
+$error: rgb(165, 50, 50);
+$bgTitle: #fff;
+
+$height: 200px;
+
+$fontSize: 16px;
+
+.card {
+  box-shadow: $shadow;
+  border-radius: $radius;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  &_title,
+  &_todos-status {
+    display: flex;
+  }
+
+  &_title {
+    justify-content: space-between;
+    margin-bottom: $padding;
+    padding: $padding * 2;
+
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    background-color: $bgTitle;
+    border-radius: $radius $radius 0 0;
+
+    &_todos-status {
+      display: flex;
+      gap: $padding;
+
+      &_completed {
+        color: $success;
+      }
+      &_uncompleted {
+        color: $error;
+      }
+    }
+  }
+
+  &_body {
+    &_todos-list {
+      max-height: $height;
+      padding: 0 $padding * 2 0 $padding * 2;
+      &_item {
+        margin-bottom: $padding;
+      }
+    }
+  }
+}
