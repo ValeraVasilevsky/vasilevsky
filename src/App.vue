@@ -26,10 +26,12 @@
 import TodoCard from "@/components/TodoCard.vue";
 import CustomButton from "@/components/ui/CustomButton.vue";
 import Notification from "@/components/ui/Notification.vue";
+import { useNotificationStore } from "@/store/notification";
 import { useTodoStore } from "@/store/todo";
 import { computed, ref } from "vue";
 
 const todoStore = useTodoStore();
+const { showNotification } = useNotificationStore();
 
 const { getTodos } = todoStore;
 const userTodos = computed(() => todoStore.todos);
@@ -40,11 +42,16 @@ const isDisabled = ref(false);
 const setTodos = async () => {
   isDisabled.value = true;
   isLoad.value = true;
-
-  await getTodos();
-
-  isLoad.value = false;
-  isDisabled.value = false;
+  try {
+    await getTodos();
+  } catch (e) {
+    if (e instanceof Error) {
+      showNotification("error", e.message);
+    }
+  } finally {
+    isDisabled.value = false;
+    isLoad.value = false;
+  }
 };
 </script>
 

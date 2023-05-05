@@ -1,16 +1,16 @@
 <template>
   <div
     class="notification"
-    :class="[`${notification.type}`, { active: isVisible }]"
+    :class="[getNotificationClass(notification.type), { active: isVisible }]"
   >
-    <div class="notofication_icon">
+    <div class="notofication__icon">
       <font-awesome-icon
         :icon="notificationIcon"
         color="#f9f9f9"
         class="fa-2x"
       />
     </div>
-    <div class="notification_body">
+    <div class="notification__body">
       {{ notification.message }}
     </div>
   </div>
@@ -32,6 +32,10 @@ const notification = computed(() => store.notification);
 const notificationIcon = computed(() =>
   notification.value.type === "success" ? faCheck : faCircleExclamation
 );
+
+const getNotificationClass = (type: string) => {
+  return `notification_${type}`;
+};
 </script>
 
 <style scoped lang="scss">

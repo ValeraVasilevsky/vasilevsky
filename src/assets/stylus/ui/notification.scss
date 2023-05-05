@@ -30,13 +30,13 @@ $fontSize: 17px;
   border-radius: $radius;
   color: $color;
 
-  &.success {
+  &_success {
     background-color: $bgSuccess;
   }
-  &.error {
+  &_error {
     background-color: $bgError;
   }
-  &.active {
+  &_active {
     transform: translateY(0);
     transition: $transition;
   }

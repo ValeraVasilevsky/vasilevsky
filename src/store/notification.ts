@@ -1,6 +1,6 @@
+import { TIMER } from "@/constants/constants";
+import { NotificationType } from "@/types/TNotification";
 import { defineStore } from "pinia";
-
-type NotificationType = "success" | "error";
 
 export const useNotificationStore = defineStore("notification", {
   state: () => ({
@@ -18,7 +18,7 @@ export const useNotificationStore = defineStore("notification", {
 
       setTimeout(() => {
         this.isVisible = false;
-      }, 2000);
+      }, TIMER);
     },
   },
 });

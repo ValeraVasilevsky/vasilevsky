@@ -16,20 +16,13 @@
 <script setup lang="ts">
 import Loader from "@/components/ui/Loader.vue";
 
-const props = defineProps({
-  actionLabel: {
-    type: String,
-    default: "",
-  },
-  isLoad: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-});
+interface IButton {
+  actionLabel: string;
+  isLoad: boolean;
+  disabled: boolean;
+}
+
+const { actionLabel, isLoad, disabled } = defineProps<IButton>();
 
 const emits = defineEmits(["handleEventClick"]);
 

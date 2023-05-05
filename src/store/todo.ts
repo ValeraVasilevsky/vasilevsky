@@ -1,8 +1,6 @@
-import { API_URL } from "@/constants/constants";
+import { http } from "@/api/http";
 import { ITodo } from "@/interfaces/ITodo";
 import { IUserTodo } from "@/interfaces/IUserTodo";
-import { useNotificationStore } from "@/store/notification";
-import axios from "axios";
 import { defineStore } from "pinia";
 
 export const useTodoStore = defineStore("todo", {
@@ -11,36 +9,31 @@ export const useTodoStore = defineStore("todo", {
   }),
   actions: {
     async getTodos(): Promise<string | IUserTodo[]> {
-      const { showNotification } = useNotificationStore();
-      try {
-        this.todos = [];
+      this.todos = [];
+      const { data } = await http.get<ITodo[]>(
+        `${import.meta.env.VITE_BASE_URL}`
+      );
 
-        const response = await axios.get<ITodo[]>(API_URL);
-
-        this.groupTodos(response.data);
-      } catch (e) {
-        if (e instanceof Error) {
-          showNotification("error", e.message);
-          return e.message;
-        }
-      }
-      showNotification("success", "Данные успешно получены");
+      this.groupTodos(data);
       return this.todos;
     },
 
     groupTodos(resTodos: ITodo[]): IUserTodo[] {
-      const mapTodos = resTodos.reduce((acc: any, cur) => {
-        acc[cur.userId] = acc[cur.userId] || {
-          userId: cur.userId,
+      const mapTodos = resTodos.reduce((acc: any, current) => {
+        acc[current.userId] = acc[current.userId] || {
+          userId: current.userId,
           todos: [],
           completed: 0,
           uncompleted: 0,
         };
 
-        acc[cur.userId].todos.push({ id: cur.id, title: cur.title });
-        cur.completed
-          ? (acc[cur.userId].completed += 1)
-          : (acc[cur.userId].uncompleted += 1);
+        acc[current.userId].todos.push({
+          id: current.id,
+          title: current.title,
+        });
+        current.completed
+          ? (acc[current.userId].completed += 1)
+          : (acc[current.userId].uncompleted += 1);
 
         return acc;
       }, {});

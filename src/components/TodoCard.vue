@@ -28,26 +28,13 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from "vue";
-
-const props = defineProps({
-  userId: {
-    type: Number,
-    default: 0,
-  },
-  todos: {
-    type: Array as PropType<{ id: number; title: string }[]>,
-    default: () => [],
-  },
-  completed: {
-    type: Number,
-    default: 0,
-  },
-  uncompleted: {
-    type: Number,
-    default: 0,
-  },
-});
+interface ITodoCard {
+  userId: number;
+  todos: { id: number; title: string }[];
+  completed: number;
+  uncompleted: number;
+}
+const { userId, todos, completed, uncompleted } = defineProps<ITodoCard>();
 </script>
 
 <style scoped lang="scss">
